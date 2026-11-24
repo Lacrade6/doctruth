@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PawShop — Tiny Pet Store</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 640px; margin: 40px auto; padding: 0 16px; }
+  header { display: flex; justify-content: space-between; align-items: baseline; }
+  #cart-count { font-weight: bold; }
+  .product { border: 1px solid #ccc; border-radius: 8px; padding: 12px; margin: 12px 0; }
+  .product h3 { margin: 0 0 4px; cursor: pointer; color: #1a5fb4; }
+  #detail { border: 2px solid #1a5fb4; border-radius: 8px; padding: 12px; margin: 16px 0; display: none; }
+  button { cursor: pointer; padding: 6px 12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>PawShop</h1>
+  <div>Cart: <span id="cart-count">0</span> items — <a href="checkout.html">Checkout</a></div>
+</header>
+<p>A tiny pet store. Three products, one cart, one checkout.</p>
+
+<div id="detail"></div>
+
+<div class="product" data-name="Cat Toy" data-price="5">
+  <h3 class="product-name">Cat Toy</h3>
+  <p>$5 — a jingly mouse for cats.</p>
+  <button class="add-btn">Add to cart</button>
+</div>
+
+<div class="product" data-name="Dog Treats" data-price="8">
+  <h3 class="product-name">Dog Treats</h3>
+  <p>$8 — crunchy biscuits for good dogs.</p>
+  <button class="add-btn">Add to cart</button>
+</div>
+
+<div class="product" data-name="Bird Seed" data-price="3">
+  <h3 class="product-name">Bird Seed</h3>
+  <p>$3 — mixed seed for garden birds.</p>
+  <button class="add-btn">Add to cart</button>
+</div>
+
+<script>
+  function renderCart() {
+    var n = parseInt(localStorage.getItem('pawshop-cart') || '0', 10);
+    document.getElementById('cart-count').textContent = n;
+  }
+  document.querySelectorAll('.product').forEach(function (card) {
+    card.querySelector('.product-name').addEventListener('click', function () {
+      var d = document.getElementById('detail');
+      d.style.display = 'block';
+      d.innerHTML = '<h2>' + card.dataset.name + '</h2><p>Price: $' + card.dataset.price + '</p>';
+    });
+    card.querySelector('.add-btn').addEventListener('click', function () {
+      var n = parseInt(localStorage.getItem('pawshop-cart') || '0', 10) + 1;
+      localStorage.setItem('pawshop-cart', String(n));
+      renderCart();
+    });
+  });
+  renderCart();
+</script>
+</body>
+</html>

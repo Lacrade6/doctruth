@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PawShop — Checkout</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 640px; margin: 40px auto; padding: 0 16px; }
+  label { display: block; margin: 12px 0; }
+  input { display: block; width: 100%; padding: 8px; margin-top: 4px; }
+  button { cursor: pointer; padding: 8px 16px; margin-top: 12px; }
+  #confirmation { display: none; border: 2px solid green; border-radius: 8px; padding: 12px; margin-top: 16px; }
+</style>
+</head>
+<body>
+<h1>Checkout</h1>
+<p><a href="index.html">← Back to store</a></p>
+<p>Items in cart: <span id="cart-count">0</span></p>
+
+<form id="checkout-form">
+  <label>Name <input id="name" type="text" required></label>
+  <label>Address <input id="address" type="text" required></label>
+  <!-- BUG (planted for the demo): the button calls submitOrder(), but the
+       function below is named placeOrder(). Clicking does nothing, so no
+       order confirmation ever appears. Kane catches this on claim C3. -->
+  <button id="place-order" type="button" onclick="submitOrder()">Place order</button>
+</form>
+
+<div id="confirmation"></div>
+
+<script>
+  document.getElementById('cart-count').textContent =
+    localStorage.getItem('pawshop-cart') || '0';
+
+  function placeOrder() {
+    var n = 'PS-' + Math.floor(100000 + Math.random() * 900000);
+    var c = document.getElementById('confirmation');
+    c.style.display = 'block';
+    c.innerHTML = '<h2>Order confirmed!</h2><p>Your order number is <strong>' + n + '</strong>. Thank you!</p>';
+    localStorage.setItem('pawshop-cart', '0');
+  }
+</script>
+</body>
+</html>
