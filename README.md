@@ -18,10 +18,10 @@ closed loop: **agent builds → Kane verifies → Kane's verdict fixes the build
 2. **Kane caught something** — the checkout shipped with a real bug: the
    "Place order" button called a function that does not exist, so no order
    confirmation ever appeared. Kane's first run on claim C3 **failed** and
-   proved the lie. Evidence: `evidence/run-001-fail/`.
+   proved the lie. Evidence: `evidence/run-004/` (C3 LIE, `submitOrder is not defined`).
 3. **Closed loop** — the failure went back to the agent, which fixed the
    button handler, and Kane's re-run on the same claim **passed**.
-   Evidence: `evidence/run-002-pass/`.
+   Evidence: `evidence/run-005/` (3 TRUE, 0 LIE).
 
 ## Quickstart
 
