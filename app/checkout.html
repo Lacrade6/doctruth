@@ -19,10 +19,10 @@
 <form id="checkout-form">
   <label>Name <input id="name" type="text" required></label>
   <label>Address <input id="address" type="text" required></label>
-  <!-- BUG (planted for the demo): the button calls submitOrder(), but the
-       function below is named placeOrder(). Clicking does nothing, so no
-       order confirmation ever appears. Kane catches this on claim C3. -->
-  <button id="place-order" type="button" onclick="submitOrder()">Place order</button>
+  <!-- FIXED (was the planted bug Kane caught in run-004): the button used to
+       call submitOrder(), but the function is named placeOrder(). Now it
+       calls placeOrder(), so clicking shows the order confirmation. -->
+  <button id="place-order" type="button" onclick="placeOrder()">Place order</button>
 </form>
 
 <div id="confirmation"></div>
